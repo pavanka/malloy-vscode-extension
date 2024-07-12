@@ -186,6 +186,14 @@ export class EditConnectionPanel {
           password,
         };
       }
+      if ('auth_token' in connection && connection.auth_token) {
+        const key = `connections.${connection.id}.auth_token`;
+        const auth_token = await this.context.secrets.get(key);
+        connection = {
+          ...connection,
+          auth_token: auth_token ?? '<unknown>',
+        };
+      }
       if ('motherDuckToken' in connection && connection.motherDuckToken) {
         const key = `connections.${connection.id}.motherDuckToken`;
         const motherDuckToken = await this.context.secrets.get(key);
@@ -228,6 +236,24 @@ export class EditConnectionPanel {
             ...connection,
             // Change the config to trigger a connection reload
             password: '',
+          };
+        }
+      }
+      if ('auth_token' in connection) {
+        const key = `connections.${connection.id}.auth_token`;
+        if (connection.auth_token) {
+          await this.context.secrets.store(key, connection.auth_token);
+          connection = {
+            ...connection,
+            // Change the config to trigger a connection reload
+            auth_token: `$secret-${Date.now().toString()}$`,
+          };
+        } else {
+          await this.context.secrets.delete(key);
+          connection = {
+            ...connection,
+            // Change the config to trigger a connection reload
+            auth_token: '',
           };
         }
       }

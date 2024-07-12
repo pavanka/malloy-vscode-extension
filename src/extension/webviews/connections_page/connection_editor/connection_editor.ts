@@ -44,6 +44,7 @@ import './bigquery_connection_editor';
 import './duckdb_connection_editor';
 import './postgres_connection_editor';
 import './snowflake_connection_editor';
+import './databricks_connection_editor';
 
 provideVSCodeDesignSystem().register(
   vsCodeButton(),
@@ -87,6 +88,7 @@ export class ConnectionEditor extends LitElement {
 
   allBackendOptions: ConnectionBackend[] = [
     ConnectionBackend.BigQuery,
+    ConnectionBackend.Databricks,
     ConnectionBackend.Postgres,
     ConnectionBackend.DuckDB,
     ConnectionBackend.Snowflake,
@@ -135,30 +137,36 @@ export class ConnectionEditor extends LitElement {
           </tr>
         </tbody>
       </table>
-      ${this.config.backend === ConnectionBackend.BigQuery
-        ? html` <bigquery-connection-editor
+      ${this.config.backend === ConnectionBackend.Databricks
+        ? html`<databricks-connection-editor
             .config=${this.config}
             .setConfig=${this.setConfig}
             .requestFilePath=${this.requestFilePath}
-          ></bigquery-connection-editor>`
-        : this.config.backend === ConnectionBackend.Postgres
-        ? html`<postgres-connection-editor
-            .config=${this.config as PostgresConnectionConfig}
-            .setConfig=${this.setConfig}
-          ></postgres-connection-editor>`
-        : this.config.backend === ConnectionBackend.DuckDB
-        ? html`<duckdb-connection-editor
-            .config=${this.config}
-            .setConfig=${this.setConfig}
-            .requestFilePath=${this.requestFilePath}
-          ></duckdb-connection-editor>`
-        : this.config.backend === ConnectionBackend.Snowflake
-        ? html`<snowflake-connection-editor
-            .config=${this.config}
-            .setConfig=${this.setConfig}
-            .requestFilePath=${this.requestFilePath}
-          ></snowflake-connection-editor>`
-        : html`<div>Unknown Connection Type</div>`}
+          ></databricks-connection-editor>`
+        : this.config.backend === ConnectionBackend.BigQuery
+          ? html` <bigquery-connection-editor
+              .config=${this.config}
+              .setConfig=${this.setConfig}
+              .requestFilePath=${this.requestFilePath}
+            ></bigquery-connection-editor>`
+          : this.config.backend === ConnectionBackend.Snowflake
+            ? html`<snowflake-connection-editor
+                .config=${this.config}
+                .setConfig=${this.setConfig}
+                .requestFilePath=${this.requestFilePath}
+              ></snowflake-connection-editor>`
+            : this.config.backend === ConnectionBackend.Postgres
+              ? html`<postgres-connection-editor
+                  .config=${this.config as PostgresConnectionConfig}
+                  .setConfig=${this.setConfig}
+                ></postgres-connection-editor>`
+              : this.config.backend === ConnectionBackend.DuckDB
+                ? html`<duckdb-connection-editor
+                    .config=${this.config}
+                    .setConfig=${this.setConfig}
+                    .requestFilePath=${this.requestFilePath}
+                  ></duckdb-connection-editor>`
+                : html`<div>Unknown Connection Type</div>`}
       <vscode-divider></vscode-divider>
       <table>
         <tbody>

@@ -9,6 +9,7 @@
     "malloy_packages": [
       "@malloydata/malloy",
       "@malloydata/db-bigquery",
+      "@malloydata/db-databricks",
       "@malloydata/db-duckdb",
       "@malloydata/db-postgres",
       "@malloydata/db-snowflake",
@@ -457,6 +458,36 @@
                 "properties": {
                   "backend": {
                     "type": "string",
+                    "const": "databricks"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "hostname": {
+                    "type": "string"
+                  },
+                  "http_path": {
+                    "type": "string"
+                  },
+                  "auth_token": {
+                    "type": "string"
+                  },
+                  "catalog": {
+                    "type": "string"
+                  },
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "backend": {
+                    "type": "string",
                     "const": "duckdb"
                   },
                   "name": {
@@ -592,15 +623,18 @@
   },
   "dependencies": {
     "@lit-labs/observers": "^2.0.2",
-    "@malloydata/db-bigquery": "0.0.151",
-    "@malloydata/db-duckdb": "0.0.151",
-    "@malloydata/db-postgres": "0.0.151",
-    "@malloydata/db-snowflake": "0.0.151",
-    "@malloydata/db-trino": "0.0.151",
-    "@malloydata/malloy": "0.0.151",
-    "@malloydata/malloy-sql": "0.0.151",
-    "@malloydata/render": "0.0.151",
-    "@malloydata/syntax-highlight": "0.0.151",
+    "@malloydata/db-bigquery": "file:../local_npm/malloydata-db-bigquery-0.0.152.tgz",
+    "@malloydata/db-databricks": "file:../local_npm/malloydata-db-databricks-0.0.152.tgz",
+    "@malloydata/db-duckdb": "file:../local_npm/malloydata-db-duckdb-0.0.152.tgz",
+    "@malloydata/db-postgres": "file:../local_npm/malloydata-db-postgres-0.0.152.tgz",
+    "@malloydata/db-snowflake": "file:../local_npm/malloydata-db-snowflake-0.0.152.tgz",
+    "@malloydata/db-trino": "file:../local_npm/malloydata-db-trino-0.0.152.tgz",
+    "@malloydata/eslint-plugin-lint": "file:../local_npm/malloydata-eslint-plugin-lint-0.0.152.tgz",
+    "@malloydata/malloy": "file:../local_npm/malloydata-malloy-0.0.152.tgz",
+    "@malloydata/malloy-interfaces": "file:../local_npm/malloydata-malloy-interfaces-0.0.152.tgz",
+    "@malloydata/malloy-sql": "file:../local_npm/malloydata-malloy-sql-0.0.152.tgz",
+    "@malloydata/render": "file:../local_npm/malloydata-render-0.0.152.tgz",
+    "@malloydata/syntax-highlight": "file:../local_npm/malloydata-syntax-highlight-0.0.152.tgz",
     "@vscode/webview-ui-toolkit": "^1.2.1",
     "duckdb": "1.0.0",
     "lit": "^3.0.2",
@@ -608,6 +642,7 @@
     "node-fetch": "^2.6.6",
     "prismjs": "^1.28.0",
     "safevalues": "^0.5.2",
+    "tiny-invariant": "^1.3.1",
     "uuid": "^8.3.2",
     "vscode-jsonrpc": "^8.1.0",
     "vscode-languageclient": "^9.0.1",

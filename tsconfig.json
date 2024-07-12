@@ -11,7 +11,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,
-    "strict": true
+    "strict": true,
+    "outDir": "dist"
   },
   "include": ["./src", "./scripts", "./test"],
   "exclude": ["node_modules", ".vscode-test", ".vscode-test-web", "dist"]

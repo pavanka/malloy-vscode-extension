@@ -95,7 +95,7 @@ export class ConnectionEditorList extends LitElement {
       ...this.connections,
       {
         name: '',
-        backend: this.availableBackends[0],
+        backend: ConnectionBackend.Trino,
         id,
       },
     ]);
